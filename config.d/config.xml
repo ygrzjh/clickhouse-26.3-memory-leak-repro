@@ -1,0 +1,11 @@
+<clickhouse>
+    <listen_host>0.0.0.0</listen_host>
+    <logger>
+        <console>1</console>
+        <log></log>
+        <errorlog></errorlog>
+    </logger>
+
+    <!-- Shorten DatabaseAtomic dropped_tables GC interval to 10s -->
+    <clean_deleted_touching_tables_interval>10</clean_deleted_touching_tables_interval>
+</clickhouse>

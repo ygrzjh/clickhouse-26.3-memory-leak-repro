@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # ClickHouse 26.3 (Test Group - Regressed Memory Behavior on 26.3.17.56)
+  clickhouse-26:
+    image: clickhouse/clickhouse-server:26.3.17.56
+    container_name: ch26_issue_repro
+    ports:
+      - "8129:8123"
+      - "9009:9000"
+    volumes:
+      - ./config.d:/etc/clickhouse-server/config.d:ro
+      - ./users.d:/etc/clickhouse-server/users.d:ro
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+  # ClickHouse 25.8 (Baseline Group - Stable Memory Behavior)
+  clickhouse-25:
+    image: clickhouse/clickhouse-server:25.8.7.3
+    container_name: ch25_issue_repro
+    ports:
+      - "8130:8123"
+      - "9010:9000"
+    volumes:
+      - ./config.d:/etc/clickhouse-server/config.d:ro
+      - ./users.d:/etc/clickhouse-server/users.d:ro
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
